@@ -1,5 +1,4 @@
-//package Example;
-import java.util.*;
+package org.ducking_robot.kroz;
 
 public interface Animado {
     abstract void acao();

@@ -1,5 +1,6 @@
+package org.ducking_robot.kroz;
+
 import java.util.*;
-import java.io.*;
 
 public class Lugar extends Elemento {
     HashMap<String,Objeto> Saidas;	// Conexoes para outros lugares

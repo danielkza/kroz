@@ -1,5 +1,4 @@
-import java.util.*;
-import java.io.*;
+package org.ducking_robot.kroz;
 
 public class Jogo {
     static Animado anima[];	// lista dos elementos que devem ser animados

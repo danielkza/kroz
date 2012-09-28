@@ -1,3 +1,5 @@
+package org.ducking_robot.kroz;
+
 import java.util.*;
 
 public class Aventureiro extends Objeto {

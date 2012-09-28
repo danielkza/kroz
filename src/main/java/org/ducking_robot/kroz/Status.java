@@ -1,5 +1,4 @@
-import java.util.*;
-import java.io.*;
+package org.ducking_robot.kroz;
 
 class Status extends Elemento implements Animado {
     static int rodadas = 0;

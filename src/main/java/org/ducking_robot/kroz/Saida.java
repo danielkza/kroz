@@ -1,5 +1,4 @@
-import java.util.*;
-import java.io.*;
+package org.ducking_robot.kroz;
 
 public class Saida extends Objeto  {
     Lugar destino;

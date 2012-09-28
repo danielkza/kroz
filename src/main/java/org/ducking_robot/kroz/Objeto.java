@@ -1,5 +1,6 @@
+package org.ducking_robot.kroz;
+
 import java.util.*;
-import java.io.*;
 
 public class Objeto extends Elemento {
     ArrayList<String> Adjs;		// Adjetivos

@@ -1,4 +1,4 @@
-import java.util.*;
+package org.ducking_robot.kroz;
 
 public class LugarAnimado extends Lugar implements Animado {
     Verbo anima;

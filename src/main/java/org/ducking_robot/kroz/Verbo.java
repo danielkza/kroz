@@ -1,6 +1,4 @@
-//package Example;
-import java.util.*;
-import java.io.*;
+package org.ducking_robot.kroz;
 
 public class Verbo {
     void acao() {
