@@ -1,8 +1,8 @@
 # Maven
-.settings
 .project
 .classpath
 
+.settings/
 target/
 
 # Java binaries
