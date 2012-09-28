@@ -1,3 +1,11 @@
+# Maven
+.settings
+.project
+.classpath
+
+target/
+
+# Java binaries
 *.class
 
 # Package Files #
