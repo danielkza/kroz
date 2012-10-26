@@ -3,8 +3,8 @@ package org.ducking_robot.kroz;
 import java.util.*;
 
 public class Lugar extends Elemento {
-    HashMap<String,Objeto> Saidas;	// Conexoes para outros lugares
-    boolean   visitado;
+    HashMap<String, Saida> Saidas;	// Conexoes para outros lugares
+    boolean visitado;
 	
     Lugar(String Nome) {
 		this(Nome, "", "");
@@ -16,27 +16,27 @@ public class Lugar extends Elemento {
 	
     Lugar(String Nome, String C, String L) {
 		super(Nome, C, L);
-		Saidas = new HashMap<String,Objeto>();
+		Saidas = new HashMap<String, Saida>();
 		visitado = false;
     }
 	
     public void Descreve() {
-		//		Motor.Titulo(getCurta(), getLonga());
 		if (!visitado) {
 			Longa();
-			//	Motor.Mostra("-----------------------------------------------------------");
 			visitado = true;
+		} else {
+			Curta();
 		}
     }
 	
     public void Longa() {
-		//Motor.Mostra(super.getLonga());
+		Motor.Mostra(super.getLonga());
 		Saidas();
 		Objetos();
     }
 	
     public void Curta() {
-		//Motor.Mostra(super.getCurta());
+		Motor.Mostra(super.getCurta());
 		Objetos();
     }
 	
@@ -47,12 +47,12 @@ public class Lugar extends Elemento {
 	
     // Retorna  uma saida
     Saida getSaida(String s) {
-		return (Saida) Saidas.get(s);
+		return Saidas.get(s);
     }    
 	
     // Modifica uma saida
-    void setSaida(String s, Objeto a) {
-		Saidas.put(s, a);
+    void setSaida(String s, Saida sa) {
+		Saidas.put(s, sa);
     }    
 	
     // Verifica a presenca da saida
@@ -64,45 +64,20 @@ public class Lugar extends Elemento {
     boolean isVisivel(Objeto o) {
 		return Contem(o) && o.visivel;
     }
-	
-    HashSet ListaObjs() {
-		HashSet<Objeto> Validos = new HashSet<Objeto>();
-		for (Iterator at = Itens.iterator(); at.hasNext();) {
-			Objeto o = (Objeto) at.next();
-			if (o.visivel) Validos.add(o);
-		}
-		return Validos;
-    }
-	
+		
     void Objetos() {
-		Objeto o;
-		HashSet v = ListaObjs();
-		if (!v.isEmpty()) {
-			//Motor.Mostra("Aqui tem:");
-			for (Iterator at = v.iterator(); at.hasNext();) {
-				o = (Objeto) at.next();
-				//Motor.Mostra("\t" + o.getCurta());
-				o.Ativa();
-				o.Conteudo("\t   ");
-			}
+		HashSet<Objeto> v = ListaObjs();
+		for (Objeto o : v) {
+			Motor.Mostra("\t" + o.getCurta());
+			o.Ativa();
+			o.Conteudo("\t   ");
 		}
     }
-	
 	
     void Saidas() {
-		Saida s;
-		HashMap<Saida,Saida> SaidasJaMostradas = new HashMap<Saida,Saida>();
-		
-		for (Iterator at = Saidas.keySet().iterator(); at.hasNext();) {
-			String x = (String) at.next();
-			s = (Saida)Saidas.get(x);
-			if (s.ativo) {
-				if (!SaidasJaMostradas.containsKey(s)) {
-					//Motor.Mostra(s.getLonga());
-					SaidasJaMostradas.put(s,s);
-				}
-			}
-		}
-		
+    	Set<Saida> saidasUnicas = new HashSet<Saida>(Saidas.values());
+    	
+    	for(Saida s : saidasUnicas)
+    		Motor.Mostra(s.getLonga());
     }
  }

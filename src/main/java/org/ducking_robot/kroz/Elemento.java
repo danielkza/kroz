@@ -130,11 +130,24 @@ public class Elemento {
 	
     boolean Contem(Objeto o) {
 		if (Itens.contains(o)) return true;
-		for (Iterator at = Itens.iterator(); at.hasNext();) {
-			Objeto x = (Objeto) at.next();
-			if (x.Contem(o)) return true;
+		for (Elemento e : Itens) {
+			if(e instanceof Objeto && ((Objeto)e).Contem(o))
+				return true;
 		}
 		return false;
+    }
+    
+    HashSet<Objeto> ListaObjs() {
+		HashSet<Objeto> Validos = new HashSet<Objeto>();
+		for(Elemento e : Itens) {
+			if(e instanceof Objeto) {
+				Objeto o = (Objeto)e;
+				if (o.ativo && o.visivel)
+					Validos.add(o);
+			}
+		}
+		
+		return Validos;
     }
 	
     // Nome e variações

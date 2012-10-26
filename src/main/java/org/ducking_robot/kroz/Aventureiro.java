@@ -46,30 +46,26 @@ public class Aventureiro extends Objeto {
     void Conteudo() { Conteudo("");}
 
     void Conteudo(String tab) {
-		Objeto o;
-		HashSet v = ListaObjs();
-		if (!v.isEmpty()) {
-			//			Motor.Mostra("VocÃª tem:");
-			for (Iterator at = v.iterator(); at.hasNext();) {
-				o = (Objeto) at.next();
-				//	Motor.Mostra(tab + "  " + o.getCurta() + ".");
-				o.Conteudo(tab + "   ");
-				o.Ativa();
-			}
+    	HashSet<Objeto> objetos = ListaObjs();
+    	
+    	if(!objetos.isEmpty())
+    		Motor.Mostra("Você tem:");
+		
+    	for(Objeto o : objetos) {
+			Motor.Mostra(tab + "  " + o.getCurta() + ".");
+			o.Conteudo(tab);
 		}
     }
-    String  Listagem() { return Listagem("");}
+    
+    String Listagem() { return Listagem("");}
 
     String Listagem(String tab) {
 		String s = "";
-		Objeto o;
-		HashSet v = ListaObjs();
-		if (!v.isEmpty()) {
-			for (Iterator at = v.iterator(); at.hasNext();) {
-				o = (Objeto) at.next();
-				s += tab + "  " + o.getCurta() + ".\n";
-				s += o.Listagem(tab + "   ");
-			}
+		HashSet<Objeto> objetos = ListaObjs();
+		
+		for(Objeto o : objetos) {
+			s += tab + "  " + o.getCurta() + ".\n";
+			s += o.Listagem(tab + "   ");
 		}
 		return s;
     }

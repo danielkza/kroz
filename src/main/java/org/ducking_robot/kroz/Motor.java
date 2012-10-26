@@ -8,7 +8,15 @@ public class Motor  {
 		G.Av.DescreveLocal();
     }
 	
-    static public void main(String[] args) throws Exception {
+    static public void fase2(String[] args)
+    {
+    	Motor m = new Motor();
+    	
+    	Status();
+    }
+    
+    static public void fase1(String[] args) throws Exception
+    {
 		Motor m = new Motor();
 		System.out.println("OBJETOS");
 		for(Elemento elem : Elemento.Mundo) 
@@ -105,29 +113,30 @@ public class Motor  {
                 System.out.println(elem.Nome);
             }
         }
-		
-		
-		
-//		for(Elemento elem : Elemento.Mundo) {
-//            if (elem instanceof Objeto) {
-//                System.out.println("Nome: " + elem.Nome);
-//            }
-//        }
     }
 	
-    static void Titulo(String s, String t) {
+    static void Titulo(String s, String t)
+    {
+    	System.out.println(s + " " + t);
 	}
 	
     static void Status() {
 		String s = G.Status.getLonga();
+		System.out.println(s);
     }
 	
-    static void Inventario() {
+    static void Inventario()
+    {
+    	G.Av.Conteudo();
     }
 	
-    static void Alerta(String s) {
+    static void Alerta(String s)
+    {
+    	System.out.println(s);
     }
 	
-    static void Mostra(String s) {
+    static void Mostra(String s)
+    {
+    	System.out.println(s);
     }
 }

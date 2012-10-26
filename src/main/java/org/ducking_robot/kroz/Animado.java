@@ -1,6 +1,7 @@
 package org.ducking_robot.kroz;
 
-public interface Animado {
+public interface Animado
+{
     abstract void acao();
 }
 
