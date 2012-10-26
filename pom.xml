@@ -2,7 +2,92 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.ducking_robot</groupId>
   <artifactId>kroz</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <name>Kroz</name>
-  <description>					</description>
+  <description></description>
+  <url>http://www.github.com/danielkza/kroz</url>
+  <inceptionYear>2012</inceptionYear>
+  <scm>
+    <url>http://www.github.com/danielkza/kroz</url>
+    <connection>scm:git:git://github.com/danielkza/kroz.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:danielkza/kroz.git</developerConnection>
+  </scm>
+  <developers>
+    <developer>
+      <id>danielkza</id>
+      <name>Daniel Miranda</name>
+      <email>danielkza2@gmail.com</email>
+    </developer>
+    <developer>
+      <id>wagner145</id>
+      <name>Wagner Ferreira</name>
+      <email>wagnerferreirasp@hotmail.com</email>
+    </developer>
+    <developer>
+      <id>pedroscocco</id>
+      <name>Pedro Scocco</name>
+      <email>pedroscocco@gmail.com</email>	
+    </developer>
+  </developers>
+  <issueManagement>
+    <url>http://www.github.com/danielkza/kroz/issues</url>
+    <system>github</system>
+  </issueManagement>
+  <build>
+	<pluginManagement>
+	  <plugins>
+	    <plugin>
+	      <groupId>org.codehaus.mojo</groupId>
+	      <artifactId>exec-maven-plugin</artifactId>
+	      <version>1.2</version>
+	    </plugin>
+	    <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+	    <plugin>
+	    	<groupId>org.eclipse.m2e</groupId>
+	    	<artifactId>lifecycle-mapping</artifactId>
+	    	<version>1.0.0</version>
+	    	<configuration>
+	    		<lifecycleMappingMetadata>
+	    			<pluginExecutions>
+	    				<pluginExecution>
+	    					<pluginExecutionFilter>
+	    						<groupId>org.codehaus.mojo</groupId>
+	    						<artifactId>exec-maven-plugin</artifactId>
+	    						<versionRange>[1.0.0,)</versionRange>
+	    						<goals>
+	    							<goal>exec</goal>
+	    						</goals>
+	    					</pluginExecutionFilter>
+	    					<action>
+	    					  <execute>
+	    					    <runOnIncremental>false</runOnIncremental>
+	    					  </execute>
+	    					</action>
+	    				</pluginExecution>
+	    			</pluginExecutions>
+	    		</lifecycleMappingMetadata>
+	    	</configuration>
+	    </plugin>
+	  </plugins>
+	</pluginManagement>  
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+	        <configuration>
+	          <executable>perl</executable>
+	          <sourceRoot>target/generated-src</sourceRoot>
+	          <commandlineArgs>src/main/resources/trad.pl src/main/resources/jogo.dsc target/generated-src/Jogo.java</commandlineArgs>
+	        </configuration>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
