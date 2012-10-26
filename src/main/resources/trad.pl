@@ -53,6 +53,16 @@ $/="\n:::\n";
 	   Integer => 0
 );
 
+# Saída
+if ($#ARGV >= 1) {
+  my $outfname = $ARGV[1];
+  open OUTFILE, ">$outfname";
+  select OUTFILE; 
+  splice(@ARGV, 1, 1);
+}
+
+binmode(STDOUT, ":utf8");
+
 # Leitura dos blocos
 while(<>) {
   chomp;			# Arranca o separador
