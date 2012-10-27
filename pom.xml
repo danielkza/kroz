@@ -69,6 +69,22 @@
 		      </filesets>
 		    </configuration>
 		  </plugin>
+		  <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-jar-plugin</artifactId>
+	        <configuration>
+		      <archive>
+		        <manifest>
+		          <mainClass>org.ducking_robot.kroz.Motor</mainClass>
+		          <packageName>org.ducking_robot.kroz</packageName>
+		        </manifest>
+		        <manifestEntries>
+		          <mode>development</mode>
+		          <url>${pom.url}</url>
+		        </manifestEntries>
+		      </archive>
+	        </configuration>
+	      </plugin>
 	</plugins>
     <pluginManagement>
     	<plugins>

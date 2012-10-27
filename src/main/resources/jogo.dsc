@@ -112,17 +112,17 @@ acao=conversarScofield
 :::
 acao convesarScofield : conversa fala
 {
-"Você precisa se furar com alguma coisa, ir à enfermaria e escapar por lá."
+"Você precisa se furar com alguma coisa, ir à enfermaria e escapar por lá.";
 }
 :::
 acao conversarDadinho : conversa fala
 {
-"Bata no guarda, pegue as chaves e fuja!"
+"Bata no guarda, pegue as chaves e fuja!";
 }
 :::
 acao bater : bate luta
 {
-"O que você está fazendo, detento?! Castigo: Solitária! O Jogo acabou por aqui..."
+"O que você está fazendo, detento?! Castigo: Solitária! O Jogo acabou por aqui...";
 }
 :::
 Objeto estilete
@@ -132,9 +132,9 @@ acao=matar
 :::
 acao matar : mata ataca
 {
-    "Você matou o enfermeiro! Fuja!"
-    @enfermeiro:vivo=0
-    @portaDaLiberdade:fechada=0
+"Você matou o enfermeiro! Fuja!";
+@enfermeiro:vivo=0
+@portaDaLiberdade:fechada=0
 }
 :::
 Objeto enfermeiro

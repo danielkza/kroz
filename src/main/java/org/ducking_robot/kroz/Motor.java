@@ -16,15 +16,30 @@ public class Motor  {
     static public void fase2(String[] args)
     {
     	Motor m = new Motor();
-    	G.Av.Itens.add(G.clips);
+    	
+    	Motor.Mostra("[pega papel]");
+    	G.Av.Pega(G.papel);
+    	
+    	Motor.Mostra("[leia]");
+    	G.papel.getVerbo("leia").acao(G.papel);
+    	
+    	Motor.Mostra("[pega clips]");
+    	G.Av.Pega(G.clips);
+    	
+    	Motor.Mostra("[fura]");
     	G.clips.getVerbo("fura").acao(G.Av);
     	
+    	Motor.Mostra("[enfermaria]");
     	G.Av.Move(G.enfermaria);
     	G.Av.local.Descreve();
     	
-    	G.Av.Itens.add(G.estilete);
-    	G.estilete.getVerbo("mata").acao();
+    	Motor.Mostra("[pega estilete]");
+    	G.Av.Pega(G.estilete);
     	
+    	Motor.Mostra("[mata]");
+    	G.estilete.getVerbo("mata").acao(G.enfermeiro);
+    	
+    	Motor.Mostra("[liberdade]");
     	G.Av.Move(G.ladoDeFora);
     	G.Av.local.Descreve();
     }
