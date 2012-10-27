@@ -1,3 +1,7 @@
+Objeto arma : arma
+curta="Uma arma perigosa"
+longa="Revólver soviético calibre .38. Lustroso."
+:::
 Objeto cama : cama colchao beliche
 curta="Sua cama"
 longa="Aqui é onde você vai dormir, para passar o tempo às vezes"
@@ -27,7 +31,6 @@ Sala corredor
 curta="Um corredor próximo à cela"
 longa="Um corredor que leva à cela, ao pátio ou ao refeitório"
 saida=Spatio
-saida=Nrefeitorio
 saida=Ecela
 contem=(guarda)
 :::
@@ -35,11 +38,11 @@ Saida Spatio : patio S sul
 curta="Uma passagem."
 longa="Uma passagem para o pátio. Não há portas"
 destino=patio
-:::
-Saida Nrefeitorio : N norte refeitorio
-curta="Saida para o refeitório"
-longa="Saida para o refeitório"
-destino=refeitorio
+# :::
+# Saida Nrefeitorio : N norte refeitorio
+# curta="Saida para o refeitório"
+# longa="Saida para o refeitório"
+# destino=refeitorio
 :::
 Saida Ecela : cela
 curta="Passagem para a cela"
@@ -99,7 +102,7 @@ acao ler : leia lê
 acao furar : fura
 {
 "Você se furou e agora está precisando de cuidados de enfermagem. Com esse machucado, sua entrada na enfermaria está liberada!";
-@Wenfermaria:fechada=0
+@Wenfermaria:fechada=0  
 }
 :::
 Objeto scofield

@@ -56,17 +56,17 @@ $/="\n:::\n";
 # Saída
 if ($#ARGV >= 1) {
   my $outfname = $ARGV[1];
-  open OUTFILE, ">$outfname";
+  open OUTFILE, ">:utf8", "$outfname";
   select OUTFILE; 
   splice(@ARGV, 1, 1);
+} else {
+  binmode(STDOUT, ":utf8");
 }
-
-binmode(STDOUT, ":utf8");
 
 # Leitura dos blocos
 while(<>) {
   chomp;			# Arranca o separador
-  s/#.*?\n$//gms;		# Comentários
+  s/#.*\n$//gms;		# Comentários
   next unless /\S/;		# Linha vazia
 
   # o bloco começa com o tipo
@@ -94,6 +94,9 @@ while(<>) {
 
 # Escreve o programa:
 print <<END_JAVA;
+
+package org.ducking_robot.kroz;
+
 import java.util.*;
 import java.io.*;
 
@@ -165,7 +168,7 @@ END_JAVA
 # Pega um valor
 sub Valor {
   my $val;
-  $val = $1 if s/^\s*\{(.*?)\}\s*//s || s/^\s*(.*)\n?//;
+  $val = $1 if s/^\s*\{(.*)\}\s*//s || s/^\s*(.*)\n?//;
   return $val;
 }
 
@@ -214,7 +217,7 @@ sub Define {
   my ($c,$v);			# campo e valor
 
   # verifica animação
-  if (s/^\s*animacao\s*=\s*(\w+)\s*?$//im) {
+  if (s/^\s*animacao\s*=\s*(\w+)\s*$//im) {
     $tipo .= "Animado";
     $anima = ", new $1()";
     $Animacoes .= <<FIM
@@ -233,7 +236,7 @@ FIM
 
   # pega os campos
   while ($_) {
-    s/#.*?$//mg;
+    s/#.*$//mg;
     s/^\s+//m;
     last unless /\S/;
     # Verificação de campos especiais (adjetivos, inclui e verbos).
@@ -242,7 +245,7 @@ FIM
 
     # Específicos de objeto
     if ($tipo =~ /^(Objeto|Saida)/) {
-      if (s/^\s*adjetivos\s*=\s*([\w\s]+?)\s*?$//mis) {	# adjetivos
+      if (s/^\s*adjetivos\s*=\s*([\w\s]+?)\s*$//mis) {	# adjetivos
 		my @adjs = split / /, $1;
       }
       elsif (s/^\s*invisivel\s*$//mis) { # invisivel
@@ -264,7 +267,7 @@ FIM
     elsif ($tipo =~/^Lugar/) {
       # As saidas devem ser adicionadas depois de todas as declarações
       # de lugares
-      if (s/^\s*saida\s+(\w+)\s*=\s*(\w+)\s*?$//mis) {
+      if (s/^\s*saida\s+(\w+)\s*=\s*(\w+)\s*$//mis) {
 		my $ss = lc $1;
 		$Saidas .=  qq/\t$var.addSaida("$ss", $2);\n/;
       }
@@ -289,15 +292,15 @@ FIM
 
        $VerboEspecifico{"_$var1"} = [@{$VerboEspecifico{"_$var1"}}, $var];
     }
-    elsif (s/^curta\s*=\s*"([^"]*?)"\s*?$//mis) { # descrição curta
+    elsif (s/^curta\s*=\s*"([^"]*)"\s*$//mis) { # descrição curta
       $Objetos .= qq/\t$var.setCurta("$1");\n/;
     }
-    elsif (s/^longa\s*=\s*"([^"]*?)"\s*?$//mis) { # descrição longa
+    elsif (s/^longa\s*=\s*"([^"]*)"\s*$//mis) { # descrição longa
       my $c = $1;
       $c =~ s/\\n/\\n" +\n\t\t"/gs;
       $Objetos .= qq/\t$var.setLonga("$c");\n/;
     }
-    elsif (s/^\s*artigos\s*=\s*([\w\s]+?)\s*?$//mis) { # artigos
+    elsif (s/^\s*artigos\s*=\s*([\w\s]+?)\s*$//mis) { # artigos
       my @arts = split / /, $1;
       my $arts;
       for $tmp (@arts) {
@@ -490,7 +493,7 @@ sub trad {
 
   my $i = 0;
 
-  while ($c =~ s/(\"[^\"]*?\")/°STRING[$i]/) {
+  while ($c =~ s/(\"[^\"]*\")/°STRING[$i]/) {
     $strings[$i++] = $1;
   }
 
@@ -530,11 +533,11 @@ sub trad {
   } @strings;
 
   # comentários
-  $c =~ s/#[^\n]*?\n//gm;
+  $c =~ s/#[^\n]*\n//gm;
 
   # Seleção dos blocos
   $i = 0;
-  while ($c =~ s/\{([^{}]*?)\n*\}/°BLOCO[$i]/sim) {
+  while ($c =~ s/\{([^{}]*)\n*\}/°BLOCO[$i]/sim) {
     $blocos[$i++]=$1;
   }
 
@@ -574,9 +577,9 @@ sub trad {
 #    }
 
     # Atributos especiais
-    $b =~ s/$regb:(Longa|Curta)\s*=\s*?([^\n]+?)\s*?\n/$1.set$2($3)\n/gms;
+    $b =~ s/$regb:(Longa|Curta)\s*=\s*([^\n]+?)\s*\n/$1.set$2($3)\n/gms;
     $b =~ s/$regb:(Longa|Curta)/$1.get$2()/gms;
-    $b =~ s{$regb:(visivel|ativo|local|lugar|visitado)\s*=\s*?([^=][^\n]*?)\s*?\n}{$1.$2=$3\n}gms;
+    $b =~ s{$regb:(visivel|ativo|local|lugar|visitado)\s*=\s*([^=][^\n]*)\s*\n}{$1.$2=$3\n}gms;
     $b =~ s/$regb:(visivel|ativo|local|lugar|visitado)/$1.$2/gms;
 
     # Valores especiais
@@ -603,7 +606,7 @@ sub trad {
     $b =~ s/OBJETO/o.getNome()/gms;
 
     # Atribuições
-    $b =~ s{$regb:(\w+)\s*=\s*?([^=][^\n]*?)\s*?\n}{
+    $b =~ s{$regb:(\w+)\s*=\s*([^=][^\n]*)\s*\n}{
       my $r = $Types{"$2"};
       $r = ($r ne "") ? "new $r($3)" : $3;
       qq/$1.setProp("$2",$r)\n/;
