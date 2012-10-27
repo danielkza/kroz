@@ -8,11 +8,25 @@ public class Motor  {
 		G.Av.DescreveLocal();
     }
 	
+    static public void main(String[] args)
+    {
+    	fase2(args);
+    }
+    
     static public void fase2(String[] args)
     {
     	Motor m = new Motor();
+    	G.Av.Itens.add(G.clips);
+    	G.clips.getVerbo("fura").acao(G.Av);
     	
-    	Status();
+    	G.Av.Move(G.enfermaria);
+    	G.Av.local.Descreve();
+    	
+    	G.Av.Itens.add(G.estilete);
+    	G.estilete.getVerbo("mata").acao();
+    	
+    	G.Av.Move(G.ladoDeFora);
+    	G.Av.local.Descreve();
     }
     
     static public void fase1(String[] args) throws Exception
@@ -36,13 +50,13 @@ public class Motor  {
                 if(elem.curta.length() != 0)
                 {
                     System.out.println("----------------------------------------------------\n" +
-                                       "Descrição curta:\n" + 
+                                       "DescriÃ§Ã£o curta:\n" + 
                                        elem.curta + "\n");
                 }
                 if(elem.longa.length() != 0)
                 {
                     System.out.println("----------------------------------------------------\n" +
-                                       "Descrição longa:\n" + 
+                                       "DescriÃ§Ã£o longa:\n" + 
                                        elem.longa);
                 }
                 if (!elem.Props.isEmpty()) 
@@ -67,13 +81,13 @@ public class Motor  {
                 if(elem.curta.length() != 0)
                 {
                     System.out.println("----------------------------------------------------\n" +
-                                       "Descrição curta:\n" + 
+                                       "DescriÃ§Ã£o curta:\n" + 
                                        elem.curta + "\n");
                 }
                 if(elem.longa.length() != 0)
                 {
                     System.out.println("----------------------------------------------------\n" +
-                                       "Descrição longa:\n" + 
+                                       "DescriÃ§Ã£o longa:\n" + 
                                        elem.longa);
                 }
                 if (!elem.Props.isEmpty()) 
